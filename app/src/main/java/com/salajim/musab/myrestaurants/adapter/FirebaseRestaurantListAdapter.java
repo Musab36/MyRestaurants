@@ -1,6 +1,9 @@
 package com.salajim.musab.myrestaurants.adapter;
 
 import android.content.Context;
+import android.support.v4.view.MotionEventCompat;
+import android.view.MotionEvent;
+import android.view.View;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
@@ -24,8 +27,17 @@ public class FirebaseRestaurantListAdapter extends FirebaseRecyclerAdapter<Resta
   }
 
   @Override
-    protected void populateViewHolder(FirebaseRestaurantViewHolder viewHolder, Restaurant model, int position) {
+    protected void populateViewHolder(final FirebaseRestaurantViewHolder viewHolder, Restaurant model, int position) {
       viewHolder.bindRestaurant(model);
+      viewHolder.mRestaurantImageView.setOnTouchListener(new View.OnTouchListener() {
+          @Override
+          public boolean onTouch(View v, MotionEvent event) {
+              if(MotionEventCompat.getActionMasked(event) == MotionEvent.ACTION_DOWN) {
+                  mOnStartDragListener.onStartDrag(viewHolder);
+              }
+              return false;
+          }
+      });
   }
 
  @Override
