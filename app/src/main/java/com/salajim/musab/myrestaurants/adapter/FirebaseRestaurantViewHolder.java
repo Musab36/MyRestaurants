@@ -2,30 +2,16 @@ package com.salajim.musab.myrestaurants.adapter;
 
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-import com.salajim.musab.myrestaurants.Constants;
 import com.salajim.musab.myrestaurants.R;
 import com.salajim.musab.myrestaurants.models.Restaurant;
-import com.salajim.musab.myrestaurants.ui.RestaurantDetailActivity;
 import com.squareup.picasso.Picasso;
 
-import org.parceler.Parcels;
-
-import java.util.ArrayList;
-
-import static com.salajim.musab.myrestaurants.R.id.restaurantImageView;
-
-public class FirebaseRestaurantViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+public class FirebaseRestaurantViewHolder extends RecyclerView.ViewHolder {
     private static final int MAX_WIDTH = 200;
     private static final int MAX_HEIGHT = 200;
 
@@ -38,7 +24,6 @@ public class FirebaseRestaurantViewHolder extends RecyclerView.ViewHolder implem
         super(itemView);
         mView = itemView;
         mContext = itemView.getContext();
-        itemView.setOnClickListener(this);
     }
 
     // we first bind the views and then set the image and text views.
@@ -58,7 +43,7 @@ public class FirebaseRestaurantViewHolder extends RecyclerView.ViewHolder implem
         categoryTextView.setText(restaurant.getCategories().get(0));
         ratingTextView.setText("Rating: " + restaurant.getRating() + "/5");
     }
-
+    /*
     @Override
     public void onClick(View view) {
         final ArrayList<Restaurant> restaurants = new ArrayList<>();
@@ -85,4 +70,5 @@ public class FirebaseRestaurantViewHolder extends RecyclerView.ViewHolder implem
             }
         });
     }
+    */
 }

@@ -10,6 +10,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.salajim.musab.myrestaurants.Constants;
 import com.salajim.musab.myrestaurants.R;
 import com.salajim.musab.myrestaurants.adapter.FirebaseRestaurantListAdapter;
@@ -40,10 +41,13 @@ public class SavedRestaurantListActivity extends AppCompatActivity implements On
         String uid = user.getUid();
 
         //Pin pointing to the correct location in firebase
-        mRestaurantReference = FirebaseDatabase
-                .getInstance()
+        Query query = FirebaseDatabase.getInstance()
                 .getReference(Constants.FIREBASE_CHILD_RESTAURANTS)
-                .child(uid);
+                .child(uid)
+                .orderByChild(Constants.FIREBASE_INDEX);
+
+        mFirebaseAdapter = new FirebaseRestaurantListAdapter(Restaurant.class, R.layout.restaurant_list_item_drag,
+                FirebaseRestaurantViewHolder.class, query, this, this);
 
         setUpFirebaseAdapter();
     }
