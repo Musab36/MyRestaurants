@@ -9,7 +9,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.salajim.musab.myrestaurants.Constants;
 import com.salajim.musab.myrestaurants.R;
 import com.salajim.musab.myrestaurants.models.Restaurant;
 import com.squareup.picasso.Picasso;
@@ -73,6 +79,8 @@ public class RestaurantDetailFragment extends Fragment implements View.OnClickLi
         mPhoneLabel.setOnClickListener(this);
         mAddressLabel.setOnClickListener(this);
 
+        mSaveRestaurantButton.setOnClickListener(this);
+
         return view;
     }
 
@@ -90,8 +98,23 @@ public class RestaurantDetailFragment extends Fragment implements View.OnClickLi
         if(v == mAddressLabel) {
             Intent mapIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("geo:" + mRestaurant.getLatitude()
             + "," + mRestaurant.getLongitude()
-            + "?q(" + mRestaurant.getName() + ")"));
+            + "?q(" + mRestaurant.getName() + ")"));//creates a marker on the map with a label of the restaurant’s name.
             startActivity(mapIntent);
+        }
+
+        if(v == mSaveRestaurantButton) {
+            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+            String uid = user.getUid();//Grapping user id
+            DatabaseReference restaurantRef = FirebaseDatabase
+                    .getInstance()
+                    .getReference(Constants.FIREBASE_CHILD_RESTAURANTS)
+                    .child(uid);//points to the correct location in the Firebase database to save restaurants to the user with the returned UID:
+            DatabaseReference pushRef = restaurantRef.push();
+            String pushId = pushRef.getKey();
+            mRestaurant.setPushId(pushId);
+            pushRef.setValue(mRestaurant);
+
+            Toast.makeText(getContext(), "Saved", Toast.LENGTH_SHORT).show();
         }
     }
 }

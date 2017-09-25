@@ -1,4 +1,4 @@
-package com.salajim.musab.myrestaurants;
+package com.salajim.musab.myrestaurants.adapter;
 
 import android.content.Context;
 import android.widget.ArrayAdapter;

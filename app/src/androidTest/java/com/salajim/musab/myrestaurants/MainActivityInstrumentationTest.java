@@ -3,6 +3,8 @@ package com.salajim.musab.myrestaurants;
 
 import android.support.test.rule.ActivityTestRule;
 
+import com.salajim.musab.myrestaurants.ui.MainActivity;
+
 import org.junit.Rule;
 
 public class MainActivityInstrumentationTest {

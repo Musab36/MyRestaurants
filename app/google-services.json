@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "1063817435209",
+    "firebase_url": "https://myrestaurants-df03a.firebaseio.com",
+    "project_id": "myrestaurants-df03a",
+    "storage_bucket": "myrestaurants-df03a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1063817435209:android:93e61fa23b47e799",
+        "android_client_info": {
+          "package_name": "com.salajim.musab.myrestaurants"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1063817435209-jqofbasrid0a02k2tm32n2r0kgimji89.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.salajim.musab.myrestaurants",
+            "certificate_hash": "29a85812aa91016222616cb59927cca314ebcc28"
+          }
+        },
+        {
+          "client_id": "1063817435209-tdgubm0mdbaivvc72jldieifoc3rstlq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDTgEtzMKW-8vVu_e-8u-QxbrNwr7gOOtQ"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1063817435209-tdgubm0mdbaivvc72jldieifoc3rstlq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
