@@ -36,7 +36,11 @@ public class SavedRestaurantListActivity extends AppCompatActivity implements On
         setContentView(R.layout.activity_restaurants);
         ButterKnife.bind(this);
 
-        //Retrieving User-Specific Data
+        setUpFirebaseAdapter();
+    }
+
+    // In this constructor, this refers to the OnStartDragListener and the Context
+    private void setUpFirebaseAdapter() {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         String uid = user.getUid();
 
@@ -44,18 +48,10 @@ public class SavedRestaurantListActivity extends AppCompatActivity implements On
         Query query = FirebaseDatabase.getInstance()
                 .getReference(Constants.FIREBASE_CHILD_RESTAURANTS)
                 .child(uid)
-                .orderByChild(Constants.FIREBASE_INDEX);
+                .orderByChild(Constants.FIREBASE_QUERY_INDEX);
 
         mFirebaseAdapter = new FirebaseRestaurantListAdapter(Restaurant.class, R.layout.restaurant_list_item_drag,
                 FirebaseRestaurantViewHolder.class, query, this, this);
-
-        setUpFirebaseAdapter();
-    }
-
-    // In this constructor, this refers to the OnStartDragListener and the Context
-    private void setUpFirebaseAdapter() {
-        mFirebaseAdapter = new FirebaseRestaurantListAdapter(Restaurant.class, R.layout.restaurant_list_item_drag,
-                FirebaseRestaurantViewHolder.class, mRestaurantReference, this, this);
 
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
