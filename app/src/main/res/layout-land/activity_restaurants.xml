@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:showDividers="middle"
+    android:baselineAligned="false"
+    android:id="@+id/linearLayout1">
+
+    <fragment
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="3"
+        android:id="@+id/fragmentItemsList"
+        android:name="com.salajim.musab.myrestaurants.ui.RestaurantListFragment"
+        tools:layout="@layout/fragment_restaurant_list" />
+
+    <!--We use a View element to add a vertical
+     divider between our list and detail views -->
+    <View
+        android:layout_width="2dp"
+        android:layout_height="wrap_content"
+        android:background="@color/colorAccent" />
+
+    <!--FrameLayout acts as a placeholder for our RestaurantDetailFragment
+     It is used when blocking out an area on the screen to display a single item
+     It should hold only one child view.-->
+    <FrameLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="6"
+        android:id="@+id/restaurantDetailContainer">
+
+    </FrameLayout>
+
+</LinearLayout>

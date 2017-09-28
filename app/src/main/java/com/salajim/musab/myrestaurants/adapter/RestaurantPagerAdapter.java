@@ -21,7 +21,7 @@ public class RestaurantPagerAdapter extends FragmentPagerAdapter {
  //Returns an instance of the RestaurantDetailFragment for the restaurant in the position provided as an argument
     @Override
     public Fragment getItem(int position) {
-        return RestaurantDetailFragment.newInstance(mRestaurants.get(position));
+        return RestaurantDetailFragment.newInstance(mRestaurants, position);
     }
 
 //Determines how many restaurants are in our Array List. This lets our adapter know how many fragments it must create.

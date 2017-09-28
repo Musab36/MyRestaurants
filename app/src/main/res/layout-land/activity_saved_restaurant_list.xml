@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:showDividers="middle"
+    android:baselineAligned="false">
+    
+    <fragment
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="3"
+        android:name="com.salajim.musab.myrestaurants.ui.SavedRestaurantListFragment"
+        android:id="@+id/fragmentItemsList"
+        tools:layout="@layout/fragment_restaurant_list" />
+
+    <View
+        android:layout_width="2dp"
+        android:layout_height="wrap_content"
+        android:background="@color/colorAccent" />
+    
+    <FrameLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="6"
+        android:id="@+id/restaurantDetailContainer">
+
+    </FrameLayout>
+
+</LinearLayout>
