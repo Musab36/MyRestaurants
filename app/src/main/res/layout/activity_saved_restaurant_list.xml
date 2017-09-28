@@ -3,13 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.salajim.musab.myrestaurants.ui.RestaurantListActivity">
+    tools:context=".ui.RestaurantListActivity">
 
     <fragment
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/fragmentRestaurantList"
-        android:name="com.salajim.musab.myrestaurants.ui.RestaurantListFragment"
+        android:name="com.salajim.musab.myrestaurants.ui.SavedRestaurantListFragment"
         tools:layout="@layout/fragment_restaurant_list" />
-
 </RelativeLayout>
