@@ -4,7 +4,10 @@ package com.salajim.musab.myrestaurants.adapter;
 import android.animation.AnimatorInflater;
 import android.animation.AnimatorSet;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.v7.widget.RecyclerView;
+import android.util.Base64;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -13,6 +16,8 @@ import com.salajim.musab.myrestaurants.R;
 import com.salajim.musab.myrestaurants.models.Restaurant;
 import com.salajim.musab.myrestaurants.util.ItemTouchHelperViewHolder;
 import com.squareup.picasso.Picasso;
+
+import java.io.IOException;
 
 public class FirebaseRestaurantViewHolder extends RecyclerView.ViewHolder implements ItemTouchHelperViewHolder {
     private static final int MAX_WIDTH = 200;
@@ -36,16 +41,36 @@ public class FirebaseRestaurantViewHolder extends RecyclerView.ViewHolder implem
         TextView categoryTextView = (TextView) mView.findViewById(R.id.categoryTextView);
         TextView ratingTextView = (TextView) mView.findViewById(R.id.ratingTextView);
 
-        Picasso.with(mContext)
-                .load(restaurant.getImageUrl())
-                .resize(MAX_WIDTH, MAX_HEIGHT)
-                .centerCrop()
-                .into(mRestaurantImageView);
+        if (!restaurant.getImageUrl().contains("http")) {
+            try {
+                Bitmap imageBitmap = decodeFromFirebaseBase64(restaurant.getImageUrl());
+                mRestaurantImageView.setImageBitmap(imageBitmap);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            } else{
 
-        nameTextView.setText(restaurant.getName());
-        categoryTextView.setText(restaurant.getCategories().get(0));
-        ratingTextView.setText("Rating: " + restaurant.getRating() + "/5");
+
+
+                Picasso.with(mContext)
+                        .load(restaurant.getImageUrl())
+                        .resize(MAX_WIDTH, MAX_HEIGHT)
+                        .centerCrop()
+                        .into(mRestaurantImageView);
+
+
+                nameTextView.setText(restaurant.getName());
+                categoryTextView.setText(restaurant.getCategories().get(0));
+                ratingTextView.setText("Rating: " + restaurant.getRating() + "/5");
+        }
     }
+
+    //decoding Base64
+    public static Bitmap decodeFromFirebaseBase64(String image) throws IOException {
+        byte[] decodeByteArray = android.util.Base64.decode(image, Base64.DEFAULT);
+        return BitmapFactory.decodeByteArray(decodeByteArray, 0, decodeByteArray.length);
+    }
+
 
     @Override
     public void onItemSelected() {

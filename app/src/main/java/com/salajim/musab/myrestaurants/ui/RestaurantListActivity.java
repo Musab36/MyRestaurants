@@ -17,6 +17,7 @@ import java.util.ArrayList;
 public class RestaurantListActivity extends AppCompatActivity implements OnRestaurantSelectedListener{
     private Integer mPosition;
     ArrayList<Restaurant> mRestaurants;
+    String mSource;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +26,7 @@ public class RestaurantListActivity extends AppCompatActivity implements OnResta
 
         if(savedInstanceState != null) {
             if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+                mSource = savedInstanceState.getString(Constants.KEY_SOURCE);
                 mPosition = savedInstanceState.getInt(Constants.EXTRA_KEY_POSITION);
                 mRestaurants = Parcels.unwrap(savedInstanceState.getParcelable(Constants.EXTRA_KEY_RESTAURANTS));
 
@@ -32,6 +34,7 @@ public class RestaurantListActivity extends AppCompatActivity implements OnResta
                     Intent intent = new Intent(this, RestaurantListActivity.class);
                     intent.putExtra(Constants.EXTRA_KEY_POSITION, mPosition);
                     intent.putExtra(Constants.EXTRA_KEY_RESTAURANTS, Parcels.wrap(mRestaurants));
+                    intent.putExtra(Constants.KEY_SOURCE, mSource);
                     startActivity(intent);
                 }
             }
@@ -46,12 +49,14 @@ public class RestaurantListActivity extends AppCompatActivity implements OnResta
         if(mPosition != null && mRestaurants != null) {
             outState.putInt(Constants.EXTRA_KEY_POSITION, mPosition);
             outState.putParcelable(Constants.EXTRA_KEY_RESTAURANTS, Parcels.wrap(mRestaurants));
+            outState.putString(Constants.KEY_SOURCE, mSource);
         }
     }
 
     @Override
-    public void onRestaurantSelected(Integer position, ArrayList<Restaurant> restaurants) {
+    public void onRestaurantSelected(Integer position, ArrayList<Restaurant> restaurants, String source) {
         mPosition = position;
         mRestaurants = restaurants;
+        mSource = source;
     }
 }

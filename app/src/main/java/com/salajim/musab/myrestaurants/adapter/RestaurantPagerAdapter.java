@@ -11,17 +11,19 @@ import java.util.ArrayList;
 
 public class RestaurantPagerAdapter extends FragmentPagerAdapter {
     private ArrayList<Restaurant> mRestaurants;
+    private String mSource;
 
     //A constructor where we set the required FragmentManager and array list of restaurants we will be swiping through.
-    public RestaurantPagerAdapter(FragmentManager fm, ArrayList<Restaurant> restaurants) {
+    public RestaurantPagerAdapter(FragmentManager fm, ArrayList<Restaurant> restaurants, String source) {
         super(fm);
         mRestaurants = restaurants;
+        mSource = source;
     }
 
  //Returns an instance of the RestaurantDetailFragment for the restaurant in the position provided as an argument
     @Override
     public Fragment getItem(int position) {
-        return RestaurantDetailFragment.newInstance(mRestaurants, position);
+        return RestaurantDetailFragment.newInstance(mRestaurants, position, mSource);
     }
 
 //Determines how many restaurants are in our Array List. This lets our adapter know how many fragments it must create.

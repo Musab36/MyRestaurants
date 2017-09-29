@@ -102,13 +102,14 @@ public class RestaurantListAdapter extends RecyclerView.Adapter<RestaurantListAd
         @Override
         public void onClick(View v) {
             int itemPosition = getLayoutPosition(); //Retrieves the position of the specific list item clicked
-            mRestaurantSelectedListener.onRestaurantSelected(itemPosition, mRestaurants);
+            mRestaurantSelectedListener.onRestaurantSelected(itemPosition, mRestaurants, Constants.SOURCE_FIND);
             if (mOrientation == Configuration.ORIENTATION_LANDSCAPE) {
                 createDetailFragment(itemPosition);
             } else {
                     Intent intent = new Intent(mContext, RestaurantDetailActivity.class);
             intent.putExtra(Constants.EXTRA_KEY_POSITION, itemPosition);
             intent.putExtra(Constants.EXTRA_KEY_RESTAURANTS, Parcels.wrap(mRestaurants));
+            intent.putExtra(Constants.KEY_SOURCE, Constants.SOURCE_FIND);
             mContext.startActivity(intent);
         }
     }
@@ -116,7 +117,7 @@ public class RestaurantListAdapter extends RecyclerView.Adapter<RestaurantListAd
         // Takes position of restaurant in list as parameter
         private void createDetailFragment(int position) {
             // Creates new RestaurantDetailFragment with the given position
-            RestaurantDetailFragment detailFragment = RestaurantDetailFragment.newInstance(mRestaurants, position);
+            RestaurantDetailFragment detailFragment = RestaurantDetailFragment.newInstance(mRestaurants, position, Constants.SOURCE_FIND);
             // Gathers necessary components to replace the FrameLayout in the layout with the RestaurantDetailFragment
             FragmentTransaction ft = ((FragmentActivity) mContext).getSupportFragmentManager().beginTransaction();
             //  Replaces the FrameLayout with the RestaurantDetailFragment
