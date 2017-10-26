@@ -2,7 +2,7 @@
 This app was created by **Musab Abdirahman**
 
 # Project
-This app is called **Restaurant Finder**, it was built using android and java
+This app is called **Restaurant Finder**, it was built using android, java and yelp api
 
 # Project Description
 **Restaurant Finder** allows users to search for restaurants all over the world using zip codes,
